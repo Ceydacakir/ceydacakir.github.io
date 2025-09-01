@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ceyda Çakır | Cybersecurity Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #000;
+      color: #00ff00;
+      overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    body.light {
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+      animation: glitch 2s infinite;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px #f00, -2px -2px #0ff; }
+      20% { text-shadow: -2px -2px #f00, 2px 2px #0ff; }
+      40% { text-shadow: 2px -2px #f00, -2px 2px #0ff; }
+      60% { text-shadow: -2px 2px #f00, 2px -2px #0ff; }
+      80% { text-shadow: 2px 2px #f00, -2px -2px #0ff; }
+      100% { text-shadow: none; }
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #0ff;
+      border-bottom: 1px solid #0ff;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
+
+    a {
+      color: #0ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #0ff;
+      margin-top: 40px;
+    }
+
+    /* Timeline */
+    .timeline {
+      border-left: 2px solid #0ff;
+      padding-left: 20px;
+      margin-top: 20px;
+      position: relative;
+    }
+    .timeline-item {
+      margin-bottom: 30px;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-30px);
+      animation: slideIn 1s forwards;
+    }
+    .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .timeline-item::before {
+      content: attr(data-icon);
+      position: absolute;
+      left: -40px;
+      top: 0;
+      font-size: 1.5rem;
+      color: #0ff;
+    }
+
+    .timeline-item h3 {
+      margin: 0;
+      color: #0f0;
+    }
+    .timeline-item span {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Matrix Rain */
+    canvas#matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    #themeToggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <button id="themeToggle">🌙 Dark Mode</button>
+
+  <header>
+    <h1 id="terminal"></h1>
+    <p>Cyber Threat Intelligence & Web Security Enthusiast</p>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm <strong>Ceyda Çakır</strong>, a 3rd-year Computer Science student at Çukurova University.<br>
+      Passionate about <strong>Cyber Threat Intelligence</strong> and <strong>Web Security</strong>.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item" data-icon="🛡️">
+        <h3>Cyber Security Program Member</h3>
+        <span>Siber Vatan / Turkey | Nov 2024 - Aug 2025</span>
+      </div>
+      <div class="timeline-item" data-icon="🎯">
+        <h3>Siber Vatan Bootcamp</h3>
+        <span>19 - 29 Aug 2025</span>
+      </div>
+      <div class="timeline-item" data-icon="💻">
+        <h3>Cybersecurity Intern</h3>
+        <span>ÖLÇSAN | Jul 2025</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul id="repo-list"><li>Loading GitHub repositories...</li></ul>
+  </section>
+
+  <section id="blog">
+    <h2>Blog</h2>
+    <ul id="blog-list"><li>Loading Medium posts...</li></ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      <a href="https://www.linkedin.com/in/ceyda-cakir-b68167286/" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/Ceydacakir" target="_blank">GitHub</a> |
+      <a href="https://medium.com/@ceydie6" target="_blank">Medium</a>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 Ceyda Çakır | Built with ❤ and curiosity for cybersecurity</p>
+  </footer>
+
+  <script>
+    // Matrix Effect
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01".split("");
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let x = 0; x < columns; x++) {
+      drops[x] = 1;
+    }
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0f0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    // Terminal Typing Effect
+    const terminal = document.getElementById("terminal");
+    const text = "root@ceydacakir:~$ whoami";
+    let index = 0;
+
+    function type() {
+      if (index < text.length) {
+        terminal.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(type, 100);
+      }
+    }
+    type();
+
+    // Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      if (document.body.classList.contains("light")) {
+        themeToggle.textContent = "☀️ Light Mode";
+      } else {
+        themeToggle.textContent = "🌙 Dark Mode";
+      }
+    });
+
+    // Fetch GitHub Repositories
+    fetch("https://api.github.com/users/Ceydacakir/repos")
+      .then(response => response.json())
+      .then(data => {
+        const repoList = document.getElementById("repo-list");
+        repoList.innerHTML = "";
+        data.slice(0, 5).forEach(repo => {
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a> - ${repo.description || "No description"}`;
+          repoList.appendChild(li);
+        });
+      })
+      .catch(error => {
+        document.getElementById("repo-list").innerHTML = "Failed to load repos.";
+      });
+
+    // Fetch Medium Blog Posts (via RSS)
+    fetch("https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@ceydie6")
+      .then(response => response.json())
+      .then(data => {
+        const blogList = document.getElementById("blog-list");
+        blogList.innerHTML = "";
+        data.items.slice(0, 5).forEach(post => {
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="${post.link}" target="_blank">${post.title}</a>`;
+          blogList.appendChild(li);
+        });
+      })
+      .catch(error => {
+        document.getElementById("blog-list").innerHTML = "Failed to load blog posts.";
+      });
+  </script>
+</body>
+</html>
