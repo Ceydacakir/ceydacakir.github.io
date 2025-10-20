@@ -228,6 +228,7 @@
     <h2>Certifications</h2>
     <ul class="certifications">
       <li>✅ <strong>CAPT (Certified Associate Penetration Tester)</strong> – <a href="https://hackviser.com/verify?id=HV-CAPT-G6WX31A6" target="_blank">Verify</a></li>
+      <li>✅ <strong>CWSE (Certified Web Security Expert)</strong> – <a href="https://hackviser.com/verify?id=HV-CWSE-A1XMKCYT" target="_blank">Verify</a></li>
     </ul>
   </section>
 
@@ -255,7 +256,6 @@
   </footer>
 
   <script>
-    // Matrix Effect
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
 
@@ -292,7 +292,6 @@
 
     setInterval(draw, 33);
 
-    // Terminal Typing Effect
     const terminal = document.getElementById("terminal");
     const text = "root@ceydacakir:~$ whoami";
     let index = 0;
@@ -306,7 +305,6 @@
     }
     type();
 
-    // Theme Toggle
     const themeToggle = document.getElementById("themeToggle");
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("light");
@@ -317,7 +315,6 @@
       }
     });
 
-    // Fetch GitHub Repositories
     fetch("https://api.github.com/users/Ceydacakir/repos")
       .then(response => response.json())
       .then(data => {
@@ -332,8 +329,6 @@
       .catch(error => {
         document.getElementById("repo-list").innerHTML = "Failed to load repos.";
       });
-
-    // Fetch Medium Blog Posts (via RSS)
     fetch("https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@ceydie6")
       .then(response => response.json())
       .then(data => {
